@@ -5,11 +5,16 @@
     <version>$version$</version>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>http://www.meriworks.se</licenseUrl>
+    <licenseUrl>https://raw.githubusercontent.com/meriworks/PowerShell.ConfigBuilder/master/LICENSE.md</licenseUrl>
     <projectUrl>http://www.meriworks.se</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Builds config files for different environments upon build</description>
-    <tags>Meriworks PowerShell visual studio Project</tags>
+    <description>
+        This nuget package adds a convention to Visual Studio projects to allow 
+        building .config files depending on environment. 
+        For example, if developers has different databases configured in web.config, 
+        this package can support each developer with a unique web.config.
+    </description>
+    <tags>Meriworks PowerShell Visual Studio Project</tags>
     <releaseNotes>
     </releaseNotes>
     <developmentDependency>true</developmentDependency>
