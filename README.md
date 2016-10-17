@@ -8,3 +8,10 @@ each developer with a unique web.config.
 ## Documentation
 Documentation is included in the nuget package and can also be read in
 [the readme.md file](Meriworks.PowerShell.ConfigBuilder/nuspec/content/_msbuild/Meriworks.PowerShell.ConfigBuilder/readme.md).
+
+## License
+Project is licensed using the [MIT License](LICENSE.md).
+
+## Author
+Package is developed by [Meriworks](http://www.meriworks.se).
+

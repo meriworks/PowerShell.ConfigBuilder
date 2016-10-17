@@ -6,7 +6,7 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>https://raw.githubusercontent.com/meriworks/PowerShell.ConfigBuilder/master/LICENSE.md</licenseUrl>
-    <projectUrl>http://www.meriworks.se</projectUrl>
+    <projectUrl>https://github.com/meriworks/PowerShell.ConfigBuilder</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
         This nuget package adds a convention to Visual Studio projects to allow 
