@@ -1,37 +1,63 @@
-﻿# Meriworks.PowerShell.ConfigBuilder
+# Meriworks.PowerShell.ConfigBuilder
 The config builder aims to make it easy to maintain multiple development environments for a project.
 The config builder can  perform two different methods of build, merge and replace.
 
 ## Merge
-You maintain a base configuration (like web.base.config) and several others (one for each development environment, build configuration etc.) and the ConfigBuilder will merge the base with the selected merge files procuce the actual configuration (like web.config) before building the project itself.
+You maintain a base configuration (like web.config) and several others (one for each development environment, build configuration etc.) and the ConfigBuilder will merge the base with the selected merge files produce the actual configuration before building the project itself.
+It's much like the normal publish handling with the difference that it occurs when you build the project instead.
 
-### Scanning
-The config builder will scan all project folders for a file named **\*.base.config** and perform a merge if the source (base/merge) files are newer than the target config file.
+### xdt files
+To create a merge file, you create an xdt file for the file you would like to modify according to the following syntax.
+
+	filename.extension.merge.keyword.value.xdt
+
+where
+
+ * _filename.extension_ - same filename and extension as the file to modify
+ * _keyword_ - optional keyword that triggers when and if a merge is performed
+ * _value_ - is an argument used to control the _keyword_ 
+ 
+#### keywords
+The following keywords are supported and are executed in this order.
+
+* _pre_ - will trigger a merge _before_ any other merges are performed.
+* _step_ - will always trigger a merge in the alphabetical order of the _vaule_.
+* _host_ - This keyword will trigger a merge if the hostname of the computer that the project is compiled on matches the _value_ argument.
+
+	**Example:** `web.config.merge.host.mycomputer.xdt` will trigger a merge if the hostname of the compiling machine is `mycomputer`.
+* _configuration_ - will trigger a merge if the current build configuration matches the _value_ argument.
+
+	**Example:** `web.config.merge.configuration.debug.xdt` will trigger a merge if the project is building the `debug` configuration.
+* _post_ - will trigger a merge _after_ all other merges have been performed.
+
+#### Example
+A folder contains the following files
+
+* web.config
+* web.config.merge.configuration.debug.xdt
+* web.config.merge.configuration.release.xdt
+* web.config.merge.host.devmachine1.xdt
+* web.config.merge.host.devmachine2.xdt
+* web.config.merge.post.xdt
+* web.config.merge.pre.xdt
+* web.config.merge.xdt
+
+When project is compiled on the `devmachine1` computer, using the debug configuration, merge files will be applied in the following order:
+
+* web.config
+* web.config.merge.pre.xdt
+* web.config.merge.xdt
+* web.config.merge.host.devmachine1.xdt
+* web.config.merge.configuration.debug.xdt
+* web.config.merge.post.xdt
 
 ### Merging
 Merging is performed using XmlTransform using xdt merge files
 <https://msdn.microsoft.com/en-us/library/dd465326(v=vs.110).aspx>
 
-#### Merge files
-Any file matching the base file path and name (before the .base. ($name)) and with a xdt extension will be a potential merge file. The follwing merge files will be processed.
-
- 1. Step - custom xdt files named `$name.step.$stepname.xdt`. Will be merged in **alpabetical order**.
- 2. Hostname - A xdt file named `$name.host.$hostname.xdt` where the $hostname must match the hostname of the current machine (Can be overridden (se below))
-
-**Example**
-* You are running a build on the machine **dev1**.
-* You have the app.base.config file in your project along with the `app.step.initialStep.xdt`, `app.step.sequentialStep.xdt`, `app.host.dev1.xdt` and `app.host.dev2.xdt`.
-* Merge will process `app.base.config` -> `app.step.initialStep.xdt` -> `app.step.sequentialStep.xdt` -> `app.host.dev1.xdt` -> `app.config`
-   
-  app.dev2.xdt will be ignored since it does not match the current hostname.
-
-* Files that are missing will be ignored
-
-### Merge if newer
-Normally a merge is always performed when building the project, but if you would like to trigger merge and only build the configuration if the base or a merge file is newer than the target file, name the base file to **.base.mergeifnewer.config**.
 
 ### Expanding variables
-After merge, the resulting file is scanned for variables and these are expanded inline.
+Before merging a xdt file, the merge file is scanned for variables and these are expanded inline.
 A variable is defined by the following syntax
 
 	$(name)
@@ -40,21 +66,36 @@ The following variables are supported
 
 ProjectDir - The path to the project directory
 SolutionDir - The path to the solution directory
+Configuration - The current configuration of the project
 ConfigBuilderHost - The current hostname (can be overridden, see below)
 
 ## Replace
-The replace mode looks for files matching the **\*.base.replace.\*** pattern and will look for a file that matches the **\*.host.[hostname].\*** pattern and copy it to the **\*.\*** path.
+The replace mode looks for files matching the `filename.replace.keyword.value.extension` pattern where
 
-Example:
+ * _filename.extension_ - same filename and extension as the file to modify
+ * _keyword_ - keyword that triggers if a replace is performed
+ * _value_ - is an optional argument (see keywords below) used to control the _keyword_ 
+
+It will replace the `filename.extension` file with the replace one that matches the keyword. 
+
+### Keywords
+
+* _host_ - This keyword will trigger a replace if the hostname of the computer that the project is compiled on matches the _value_ argument.
+
+	**Example:** `web.replace.host.mycomputer.config` will trigger a replace if the hostname of the compiling machine is `mycomputer`.
+* _default_ - will indicate the default replacement file that will be used if no other matching keyword is active. **Note: This file must exists to trigger the replace function**
+
+**Example:**
 You would like to check in different license.config files, one for each host. You set up the following files
 
-* `license.base.replace.config` - an emtpy trigger file that will trigger the merge
-* `license.host.productionServer.config` - a license file for the productionServer
-* `license.host.dev1.config` - a license file for the dev1 host.
+* `license.replace.default.config` - an default license file that will be used if no other file deems suitable.
+
+* `license.replace.host.productionServer.config` - a license file for the productionServer
+* `license.replace.host.dev1.config` - a license file for the dev1 host.
 
 When building, the script will look for the current hostname (can be overridden, see below)), and if it exists, copy the matching hostfile to the `license.config` file.
 
-If no matching hostfile is found, the base file is copied to the target location.
+If no matching hostfile is found, the default file is copied to the target location.
 
 ## Overriding
 
@@ -68,3 +109,6 @@ or setting it in the .csproj file
 	<PropertyGroup>
 		<ConfigBuilderHost>test</ConfigBuilderHost>
 	</PropertyGroup>
+
+## Legacy
+Meriworks.PowerShell.ConfigBuilder had a previous convention including a .base. notation in the filename. This is still supported, and documentation regarding that can be [found at github](https://github.com/meriworks/PowerShell.ConfigBuilder/blob/b6c8584ea626558b9068f7f91f7bfbb835013f6b/Meriworks.PowerShell.ConfigBuilder/nuspec/content/_msbuild/Meriworks.PowerShell.ConfigBuilder/readme.md).

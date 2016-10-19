@@ -81,8 +81,10 @@ function ShouldMergeBePerformed([string]$targetFile,[string]$baseFile, $mergeFil
 	Write-Host "Config is not built since target file is newer."
 	return $false
 }
-function PerformMerge([string] $baseFile, [bool] $keepNewerFiles){
-			#get existing target and merge files
+function PerformMergeLegacy([string] $baseFile, [bool] $keepNewerFiles){
+		Write-Host "Warning: Meriworks.PowerShell.ConfigBuilder detected a Legacy naming convention, please change this to the new 5.1 convention. See documentation for more information"
+
+		#get existing target and merge files
 		$files = findMergeScripts $baseFile
 		if($files -is [system.array]) {
 			$targetFile = $files[0]
@@ -110,18 +112,19 @@ function PerformMerge([string] $baseFile, [bool] $keepNewerFiles){
 		ExpandVariables $targetFile
 
 }
-function PerformMergeOverwriteExisting(){
+function PerformMergeOverwriteExistingLegacy(){
 	Process {
-		PerformMerge $_ $false
+		PerformMergeLegacy $_ $false
 	}
 }
-function PerformMergeIfNewer(){
+function PerformMergeIfNewerLegacy(){
 	Process {
-		PerformMerge $_ $true
+		PerformMergeLegacy $_ $true
 	}
 }
-function PerformReplace(){
+function PerformReplaceLegacy(){
 	Process {
+		Write-Host "Warning: Meriworks.PowerShell.ConfigBuilder detected a Legacy naming convention, please change this to the new 5.1 convention. See documentation for more information"
 		$baseFile = $_
 		Write-Host "Performing replace on $(Resolve-Path $baseFile -Relative)"
 		$dir = Split-Path -Parent $baseFile
@@ -140,11 +143,109 @@ function PerformReplace(){
 		}
 	}
 }
+function FindBaseMergeFiles {
+    Begin{
+        $files=@{}
+    }
+	Process {
+		$file = $_
+		$baseFileSegments = $_ -split ".merge."
+		$file = $baseFileSegments[0] 
+        if($files.ContainsKey($file)) {
+            return
+        }
+        $files.Add($file,$file)
+        Write-Output $file
+	}
+}
 
+function PerformMerge {
+    Begin{
+        Write-Host "PerformMerge starting"
+    }
+    Process{
+        Write-Host "Processing merge of file $_"
+        $dir = Split-Path -Parent $_
+        $name = Split-Path -Leaf $_
+        #create backup to merge with (in case something goes wrong)
+        $tempFile = Join-Path $dir "~$name"
+        Copy-Item $_ $tempFile
+
+        MergeFile $tempFile "$_.merge.pre.xdt"
+	    $stepScripts = Get-ChildItem $dir -Name "$name.merge.step.*.xdt"
+	    foreach($stepScript in $stepScripts) {
+            MergeFile $tempFile (Join-Path $dir $stepScript)
+   	    }
+        MergeFile $tempFile "$_.merge.host.$configBuilderHost.xdt"
+        MergeFile $tempFile "$_.merge.configuration.$configuration.xdt"
+        MergeFile $tempFile "$_.merge.post.xdt"
+
+        Copy-Item $tempFile $_
+        Remove-Item $tempFile
+    }
+}
+
+function MergeFile($baseFile,$mergeFile) {
+    if(-not (Test-Path $mergeFile)) {
+        return
+    }
+    Write-Host "Merging with $mergeFile"
+    $dir = Split-Path -Parent $mergeFile
+
+    $name= Split-Path -Leaf $mergeFile
+    $tempFile = Join-Path $dir "~$name"
+    XmlDocTransformAndExpandVariables $baseFile $mergeFile
+}
+
+function XmlDocTransformAndExpandVariables($xml, $xdt)
+{
+    if (!$xml -or !(Test-Path -path $xml -PathType Leaf)) {
+        throw "File not found. $xml";
+    }
+    if (!$xdt -or !(Test-Path -path $xdt -PathType Leaf)) {
+        throw "File not found. $xdt";
+    }
+
+    $xmldoc = New-Object Microsoft.Web.XmlTransform.XmlTransformableDocument;
+    $xmldoc.PreserveWhitespace = $true
+    $xmldoc.Load($xml);
+
+    $transformXml = (Get-Content -raw $xdt) -replace "\$\(ProjectDir\)", "$projectDir" -replace "\$\(SolutionDir\)",  "$solutionDir" -replace "\$\(ConfigBuilderHost\)", "$configBuilderHost" 
+    $transf = New-Object Microsoft.Web.XmlTransform.XmlTransformation($transformXml,$false,$null);
+    if ($transf.Apply($xmldoc) -eq $false)
+    {
+        throw "Transformation failed."
+    }
+    $xmldoc.Save($xml);
+}
+function PerformReplace(){
+	Process {
+		$defaultFile= $_
+		$dir = Split-Path -Parent $defaultFile
+		$name = Split-Path -Leaf $defaultFile
+		$defaultFileSegments = $name -split ".replace.default."
+		$name = Split-Path -Leaf $defaultFileSegments[0]
+		$extension = $defaultFileSegments[1]
+		$hostFile = Join-Path $dir "$name.replace.host.$configBuilderHost.$extension"
+		$targetFile = Join-Path $dir "$name.$extension"
+		Write-Host "Performing replace on $(Resolve-Path $targetFile -Relative)"
+		if(test-path $hostFile) {
+			Write-Host "Host replace file found $(Resolve-Path $hostFile -Relative)"
+			Write-Host "Creating target: $targetFile"
+			Copy-Item $hostFile $targetFile -Force
+		} else {
+			Write-Host "No replacement file found for the current $configBuilderHost, using default instead"
+			Copy-Item $defaultFile $targetFile -Force
+		}
+	}
+}
 Write-Host "Running ConfigBuilder"
-Get-ChildItem $projectDir -Include *.base.config -Recurse|PerformMergeOverwriteExisting
-Get-ChildItem $projectDir -Include *.base.mergeifnewer.config -Recurse|PerformMergeIfNewer
-Get-ChildItem $projectDir -Include *.base.replace.* -Recurse|PerformReplace
+Get-ChildItem $projectDir -Include *.base.config -Recurse|PerformMergeOverwriteExistingLegacy
+Get-ChildItem $projectDir -Include *.base.mergeifnewer.config -Recurse|PerformMergeIfNewerLegacy
+Get-ChildItem $projectDir -Include *.base.replace.* -Recurse|PerformReplaceLegacy
+
+Get-ChildItem $projectDir -Include *.merge.*.xdt -Recurse|FindBaseMergeFiles|PerformMerge
+Get-ChildItem $projectDir -Include *.replace.default.* -Recurse|PerformReplace
 
 # SIG # Begin signature block
 # MIIWcAYJKoZIhvcNAQcCoIIWYTCCFl0CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB

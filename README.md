@@ -13,5 +13,16 @@ Documentation is included in the nuget package and can also be read in
 Project is licensed using the [MIT License](LICENSE.md).
 
 ## Author
-Package is developed by [Meriworks](http://www.meriworks.se).
+Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](http://www.meriworks.se).
+
+## Changelog
+
+### v5.1
+* Added a new default convention that modifies the original file. Just add xdt files for automatic merge on build. The old convention is still supported.
+
+### v5.0.1 - 2016-10-17
+* Minor changes in nuspec, license and documentation
+
+### v5.0.0 - 2016-10-17
+* Initial release
 
