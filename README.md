@@ -23,6 +23,7 @@ Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](ht
 
 ### v5.1.1
 * Removed scripts and readme from project
+
 ### v5.1
 * Added a new default convention that modifies the original file. Just add xdt files for automatic merge on build. The old convention is still supported.
 
