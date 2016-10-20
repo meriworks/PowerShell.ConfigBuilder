@@ -239,7 +239,7 @@ function PerformReplace(){
 		}
 	}
 }
-Write-Host "Running ConfigBuilder"
+Write-Host "Running ConfigBuilder, check https://github.com/meriworks/PowerShell.ConfigBuilder for documentation"
 Get-ChildItem $projectDir -Include *.base.config -Recurse|PerformMergeOverwriteExistingLegacy
 Get-ChildItem $projectDir -Include *.base.mergeifnewer.config -Recurse|PerformMergeIfNewerLegacy
 Get-ChildItem $projectDir -Include *.base.replace.* -Recurse|PerformReplaceLegacy
@@ -250,8 +250,8 @@ Get-ChildItem $projectDir -Include *.replace.default.* -Recurse|PerformReplace
 # SIG # Begin signature block
 # MIIWcAYJKoZIhvcNAQcCoIIWYTCCFl0CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxFHh1KROwzkVoNbWD9YzLZNS
-# E1ugghHAMIID7jCCA1egAwIBAgIQfpPr+3zGTlnqS5p31Ab8OzANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnGqgGQOiqrzSqL6TfNHFM4nm
+# u8egghHAMIID7jCCA1egAwIBAgIQfpPr+3zGTlnqS5p31Ab8OzANBgkqhkiG9w0B
 # AQUFADCBizELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rlcm4gQ2FwZTEUMBIG
 # A1UEBxMLRHVyYmFudmlsbGUxDzANBgNVBAoTBlRoYXd0ZTEdMBsGA1UECxMUVGhh
 # d3RlIENlcnRpZmljYXRpb24xHzAdBgNVBAMTFlRoYXd0ZSBUaW1lc3RhbXBpbmcg
@@ -350,22 +350,22 @@ Get-ChildItem $projectDir -Include *.replace.default.* -Recurse|PerformReplace
 # LgYDVQQDEydHbG9iYWxTaWduIENvZGVTaWduaW5nIENBIC0gU0hBMjU2IC0gRzIC
 # DFeHRSyJO9lNEFdVJDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAA
 # oQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4w
-# DAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUa9sqRob9OonGePdqc1nyArDb
-# EeQwDQYJKoZIhvcNAQEBBQAEggEAMsEi2RyltNUklHQWY149WzQe6RABm+Rxgu+l
-# 8hKYq3CtEUw1nOWl0dR6g9wcK+SfTuDyFzKvM0UwNOdO+mT94FdY4AaTCpvei33y
-# 3RjBN7vVtsfs7CX4V1SYJ605T62ZQXJQOwUa4zf5EGO6PMARos7P2LFFwQBoAUjn
-# iRdZO5mJEQFxPAdeqFiJGySEUG/XMXjEcJHUmjkU2pm793XJBrfFIoxxzINt915+
-# mmha4tWCH+CPACdz4XTVcCN4no7nBGKpYxwqt8fMq5IZAVYEb8SKY2TMwrsfMgai
-# YfDtVDR5kI7i49TzreCp/VCrvQdhXNun/F+l6aGpATLU9V6rRqGCAgswggIHBgkq
+# DAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUMibCyLx5XuYnnXrW6nG8itxS
+# Ea4wDQYJKoZIhvcNAQEBBQAEggEAR+jUbyaTRtoT9DH0kbzstaeNvJ4lkAnRfZx0
+# ISlVqCRp5jy3SIBrtzEh0ezavWR8DxIVz0V5MjDPw5TXYaxkLfOgRDWCJu006D6g
+# ypXIrCZ7B2VwZBNpJAcrTsbjdEJ1LCAAZta1DMMU15e/Xdn9jj/MOVXS1hKQVp+w
+# +mrDVVyZZTV2narh4ZogRUOJggNqkFUtpQHHQV3PMx2xvUZJsEFq1hn/qfDXFmUh
+# Y+PkHHM132hESo3/uO2ZJHCVhyZqNyAuf08rVgkeg7KU9qNrrbYEHzmEM28vFfe8
+# d/pJBAHZdFeuVr1s/bcBVWHmjTWXMxweqKjRzdPd2cpJNqAbEKGCAgswggIHBgkq
 # hkiG9w0BCQYxggH4MIIB9AIBATByMF4xCzAJBgNVBAYTAlVTMR0wGwYDVQQKExRT
 # eW1hbnRlYyBDb3Jwb3JhdGlvbjEwMC4GA1UEAxMnU3ltYW50ZWMgVGltZSBTdGFt
 # cGluZyBTZXJ2aWNlcyBDQSAtIEcyAhAOz/Q4yP6/NW4E2GqYGxpQMAkGBSsOAwIa
 # BQCgXTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0x
-# NjEwMTkxODQxMTlaMCMGCSqGSIb3DQEJBDEWBBQgzBefDxZxomCfqXdcljuKwGld
-# nDANBgkqhkiG9w0BAQEFAASCAQBnv/Kp1Sqk+ilP1KEOII1mWh7AWx82+iz43XMu
-# Df4IpdXPGCbizASWM4Vtt6/Tf69kN4HLD+IaxB6yXhFXI6xyBKFeRtn1AHD0gswI
-# NxDxZ1bNnk/d/4BIwkSvAUMVkcHiPovBLyODczU88GqD7dPzbHMfLkn4XWFDKSM7
-# T3ejToA5TpenMpzKhwFrWE5CCGf361qWjgNmR7iVgCmi9pGRsHxQnC2iDkjr2Cq1
-# 9Ze8yBSnly4O0dEhbInI4B5y/TMZO/kdF6Pe0VQJLc5FO79jbnXTaV46uTJMaxFo
-# wnvmUQtH6aaARve/7w0/FkZJufXnRKJgehI9qPVw/8bOeJki
+# NjEwMjAwNzAwMTNaMCMGCSqGSIb3DQEJBDEWBBQ92EYodRyqIcIDw1QZd31YSuSW
+# fzANBgkqhkiG9w0BAQEFAASCAQBfVfH2Z018v3LsMHTKka0sOGoW1jtr6/N/ZBoP
+# uRA2LlWwTBg+g7n9kG5/agUFkdJZdM0xv8uo8ZlBjb9SQFT5k2F+ml2ctNGc/40d
+# KdpBmbrxI+nAZeBPwTFtSfAomBDj+0rnbOXWGLL1XEB/QMwRkiMU/mzAW5XSuE7S
+# ZvAesL1uztVfZkVMN79bCv0CFMZ5kJAaHki/novcbGfGTgfACmrWpJ2qThc6aMZG
+# 42T1SD6y70SKvJUaS8A81crzFdARnbQURYeIihWyTuIyp5PJKHOuF59IZlPUlJ/g
+# zMsN5gmCF9BQZbDHhvA8XzYmWPoqN5wmU9Ipbn/boHDK+MJY
 # SIG # End signature block

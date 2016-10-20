@@ -8,7 +8,7 @@
         <XmlTransforDllPath Condition="!Exists($(XmlTransforDllPath))">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v11.0\Web\Microsoft.Web.XmlTransform.dll</XmlTransforDllPath>
         <!--<PowerShellExe Condition=" '$(PowerShellExe)'=='' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>-->
         <PowerShellExe Condition=" '$(PowerShellExe)'=='' ">%WINDIR%\SysNative\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
-        <MW_PS_CB_ConfigBuilderPowershellScriptLocation Condition=" '$(MW_PS_CB_ConfigBuilderPowershellScriptLocation)'=='' ">$(ProjectDir)_msbuild\Meriworks.PowerShell.ConfigBuilder\ConfigBuilder.ps1</MW_PS_CB_ConfigBuilderPowershellScriptLocation>
+        <MW_PS_CB_ConfigBuilderPowershellScriptLocation Condition=" '$(MW_PS_CB_ConfigBuilderPowershellScriptLocation)'=='' ">$(MSBuildThisFileDirectory)..\tools\ConfigBuilder.ps1</MW_PS_CB_ConfigBuilderPowershellScriptLocation>
         <MW_PS_CB_ErrorText>ConfigBuilder cannot continue: File is missing; '{0}'</MW_PS_CB_ErrorText>
     </PropertyGroup>
 

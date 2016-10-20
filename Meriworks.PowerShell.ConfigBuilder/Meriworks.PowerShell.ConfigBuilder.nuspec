@@ -21,7 +21,6 @@
   </metadata>
   <files>
     <file src="nuspec\build\**\*.*" target="build\"/>
-    <file src="nuspec\content\**\*.*" target="content\"/>
     <file src="nuspec\tools\**\*.*" target="tools\"/>
   </files>
 </package>
