@@ -56,7 +56,6 @@
     <None Include="Meriworks.PowerShell.ConfigBuilder.nuspec" />
     <None Include="nuspec\build\Meriworks.PowerShell.ConfigBuilder.targets" />
     <None Include="nuspec\tools\ConfigBuilder.ps1" />
-    <None Include="nuspec\tools\install.ps1" />
     <None Include="packages.config" />
     <None Include="_msbuild\AfterBuild.ps1" />
     <None Include="_msbuild\BeforeBuild.ps1" />

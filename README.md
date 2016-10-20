@@ -21,6 +21,9 @@ Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](ht
 <a name="changelog"></a>
 ## Changelog
 
+### v5.1.2
+* Fixed error with nuget install script
+
 ### v5.1.1
 * Removed scripts and readme from project
 
