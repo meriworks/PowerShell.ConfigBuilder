@@ -21,8 +21,10 @@ Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](ht
 <a name="changelog"></a>
 ## Changelog
 
-### v5.1.2 
+### v5.1.3 
 * Removed unused dll from nupkg file
+
+### v5.1.2 
 * Fixed error with nuget install script
 
 ### v5.1.1
