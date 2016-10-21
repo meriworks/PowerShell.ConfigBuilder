@@ -1,4 +1,4 @@
-# Meriworks.PowerShell.ConfigBuilder
+﻿# Meriworks.PowerShell.ConfigBuilder
 
 This nuget package adds a convention to Visual Studio projects to allow
 building .config files depending on environment. For example, if developers
@@ -23,6 +23,7 @@ Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](ht
 
 ### v5.1.2 
 * Removed unused dll from nupkg file
+* Fixed error with nuget install script
 
 ### v5.1.1
 * Removed scripts and readme from project
