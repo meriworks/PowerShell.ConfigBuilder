@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8">
-    <id>$id$</id>
+    <id>Meriworks.PowerShell.ConfigBuilder</id>
     <version>$version$</version>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <authors>dhvik</authors>
     <licenseUrl>https://raw.githubusercontent.com/meriworks/PowerShell.ConfigBuilder/master/LICENSE.md</licenseUrl>
     <projectUrl>https://github.com/meriworks/PowerShell.ConfigBuilder</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
