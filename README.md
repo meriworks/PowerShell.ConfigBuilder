@@ -21,16 +21,16 @@ Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](ht
 <a name="changelog"></a>
 ## Changelog
 
-### v5.1.3 
+### v5.1.3 - 2016-10-21
 * Removed unused dll from nupkg file
 
-### v5.1.2 
+### v5.1.2 - 2016-10-20
 * Fixed error with nuget install script
 
-### v5.1.1
+### v5.1.1 - 2016-10-20
 * Removed scripts and readme from project
 
-### v5.1
+### v5.1 - 2016-10-20
 * Added a new default convention that modifies the original file. Just add xdt files for automatic merge on build. The old convention is still supported.
 
 ### v5.0.1 - 2016-10-17
