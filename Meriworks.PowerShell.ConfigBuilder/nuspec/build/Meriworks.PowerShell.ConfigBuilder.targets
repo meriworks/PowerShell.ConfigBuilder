@@ -2,7 +2,9 @@
 <Project xmlns="http://schemas.microsoft.com/developer/MsBuild/2003" ToolsVersion="4.0">
 
     <PropertyGroup>
-        <XmlTransforDllPath Condition="'$(XmlTransforDllPath)' == '' Or !Exists($(XmlTransforDllPath))">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v14.0\Web\Microsoft.Web.XmlTransform.dll</XmlTransforDllPath>
+        <XmlTransforDllPath Condition="'$(XmlTransforDllPath)' == '' Or !Exists($(XmlTransforDllPath))">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Web\Microsoft.Web.XmlTransform.dll</XmlTransforDllPath>
+        <XmlTransforDllPath Condition="!Exists($(XmlTransforDllPath))">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(MSBuildToolsVersion)\Web\Microsoft.Web.XmlTransform.dll</XmlTransforDllPath>
+        <XmlTransforDllPath Condition="!Exists($(XmlTransforDllPath))">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v14.0\Web\Microsoft.Web.XmlTransform.dll</XmlTransforDllPath>
         <XmlTransforDllPath Condition="!Exists($(XmlTransforDllPath))">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v13.0\Web\Microsoft.Web.XmlTransform.dll</XmlTransforDllPath>
         <XmlTransforDllPath Condition="!Exists($(XmlTransforDllPath))">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v12.0\Web\Microsoft.Web.XmlTransform.dll</XmlTransforDllPath>
         <XmlTransforDllPath Condition="!Exists($(XmlTransforDllPath))">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v11.0\Web\Microsoft.Web.XmlTransform.dll</XmlTransforDllPath>

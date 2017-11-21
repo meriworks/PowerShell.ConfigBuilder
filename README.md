@@ -21,6 +21,9 @@ Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](ht
 <a name="changelog"></a>
 ## Changelog
 
+## v5.1.4 - 2017-11-21
+* Fixed support for Visual Studio 2017 [#1](https://github.com/meriworks/PowerShell.ConfigBuilder/issues/1)
+
 ### v5.1.3 - 2016-10-21
 * Removed unused dll from nupkg file
 
