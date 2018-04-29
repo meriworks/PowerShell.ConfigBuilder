@@ -5,43 +5,10 @@ building .config files depending on environment. For example, if developers
 has different databases configured in web.config, this package can support
 each developer with a unique web.config.
 
+* [Documentation](#documentation)
 * [License](#license)
 * [Author](#author)
 * [Changelog](#changelog)
-* [Documentation](#documentation)
-
-<a name="license"></a>
-## License
-Project is licensed using the [MIT License](LICENSE.md).
-
-<a name="author"></a>
-## Author
-Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](http://www.meriworks.se).
-
-<a name="changelog"></a>
-## Changelog
-
-## v5.1.4 - 2017-11-21
-* Fixed support for Visual Studio 2017 [#1](https://github.com/meriworks/PowerShell.ConfigBuilder/issues/1)
-
-### v5.1.3 - 2016-10-21
-* Removed unused dll from nupkg file
-
-### v5.1.2 - 2016-10-20
-* Fixed error with nuget install script
-
-### v5.1.1 - 2016-10-20
-* Removed scripts and readme from project
-
-### v5.1 - 2016-10-20
-* Added a new default convention that modifies the original file. Just add xdt files for automatic merge on build. The old convention is still supported.
-
-### v5.0.1 - 2016-10-17
-* Minor changes in nuspec, license and documentation
-
-### v5.0.0 - 2016-10-17
-* Initial release
-
 <a name="documentation"></a>
 ## Documentation
 The config builder aims to make it easy to maintain multiple development environments for a project.
@@ -109,10 +76,40 @@ A variable is defined by the following syntax
 
 The following variables are supported
 
-ProjectDir - The path to the project directory
-SolutionDir - The path to the solution directory
-Configuration - The current configuration of the project
-ConfigBuilderHost - The current hostname (can be overridden, see below)
+* ProjectDir - The path to the project directory
+* SolutionDir - The path to the solution directory
+* Configuration - The current configuration of the project
+* ConfigBuilderHost - The current hostname (can be overridden, see below)
+
+##### Example
+
+If you have an **app.config** file in your project (located at **c:\proj\myProject\myproject.cproj**) with the following contents
+
+	<?xml version="1.0" encoding="utf-8"?>
+	<configuration>
+	  <appSettings>
+	    <add key="path" value="c:\temp\some.file"/>
+	  </appSettings>
+	</configuration>
+
+and add a merge file named **app.config.merge.xdt** with the following contents
+	
+	<?xml version="1.0" encoding="utf-8"?>
+	<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+	  <appSettings>		
+	    <add key="path" value="$(ProjectDir)MyFolder\some.file" xdt:Locator="Match(key)" xdt:Tranform="SetAttributes" > 
+	  </appSettings>
+	</configuration>
+
+The resulting app.content after compilation will look like below
+
+	<?xml version="1.0" encoding="utf-8"?>
+	<configuration>
+	  <appSettings>
+	    <add key="path" value="c:\proj\myProject\MyFolder\some.file"/>
+	  </appSettings>
+	</configuration>
+
 
 ### Replace
 The replace mode looks for files matching the `filename.replace.keyword.value.extension` pattern where
@@ -157,4 +154,37 @@ or setting it in the .csproj file
 
 ### Legacy
 Meriworks.PowerShell.ConfigBuilder had a previous convention including a .base. notation in the filename. This is still supported, and documentation regarding that can be [found at github](https://github.com/meriworks/PowerShell.ConfigBuilder/blob/b6c8584ea626558b9068f7f91f7bfbb835013f6b/Meriworks.PowerShell.ConfigBuilder/nuspec/content/_msbuild/Meriworks.PowerShell.ConfigBuilder/readme.md).
+
+<a name="license"></a>
+## License
+Project is licensed using the [MIT License](LICENSE.md).
+
+<a name="author"></a>
+## Author
+Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](http://www.meriworks.se).
+
+<a name="changelog"></a>
+## Changelog
+
+## v5.1.4 - 2017-11-21
+* Fixed support for Visual Studio 2017 [#1](https://github.com/meriworks/PowerShell.ConfigBuilder/issues/1)
+
+### v5.1.3 - 2016-10-21
+* Removed unused dll from nupkg file
+
+### v5.1.2 - 2016-10-20
+* Fixed error with nuget install script
+
+### v5.1.1 - 2016-10-20
+* Removed scripts and readme from project
+
+### v5.1 - 2016-10-20
+* Added a new default convention that modifies the original file. Just add xdt files for automatic merge on build. The old convention is still supported.
+
+### v5.0.1 - 2016-10-17
+* Minor changes in nuspec, license and documentation
+
+### v5.0.0 - 2016-10-17
+* Initial release
+
 
