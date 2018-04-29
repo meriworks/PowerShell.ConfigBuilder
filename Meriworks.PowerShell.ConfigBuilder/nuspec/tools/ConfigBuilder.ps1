@@ -172,6 +172,7 @@ function PerformMerge {
         Copy-Item $_ $tempFile
 
         MergeFile $tempFile "$_.merge.pre.xdt"
+        MergeFile $tempFile "$_.merge.xdt"
 	    $stepScripts = Get-ChildItem $dir -Name "$name.merge.step.*.xdt"
 	    foreach($stepScript in $stepScripts) {
             MergeFile $tempFile (Join-Path $dir $stepScript)
