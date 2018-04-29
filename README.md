@@ -166,6 +166,9 @@ Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](ht
 <a name="changelog"></a>
 ## Changelog
 
+## v5.1.5 - 2018-04-29
+* Fixed issue where merge didn't trigger if .merge.xdt is the only mergefile
+
 ## v5.1.4 - 2017-11-21
 * Fixed support for Visual Studio 2017 [#1](https://github.com/meriworks/PowerShell.ConfigBuilder/issues/1)
 

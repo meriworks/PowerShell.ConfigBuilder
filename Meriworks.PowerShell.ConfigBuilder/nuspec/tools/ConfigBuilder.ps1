@@ -244,7 +244,7 @@ Get-ChildItem $projectDir -Include *.base.config -Recurse|PerformMergeOverwriteE
 Get-ChildItem $projectDir -Include *.base.mergeifnewer.config -Recurse|PerformMergeIfNewerLegacy
 Get-ChildItem $projectDir -Include *.base.replace.* -Recurse|PerformReplaceLegacy
 
-Get-ChildItem $projectDir -Include *.merge.*.xdt -Recurse|FindBaseMergeFiles|PerformMerge
+Get-ChildItem $projectDir -Include *.merge.*xdt -Recurse|FindBaseMergeFiles|PerformMerge
 Get-ChildItem $projectDir -Include *.replace.default.* -Recurse|PerformReplace
 
 # SIG # Begin signature block
