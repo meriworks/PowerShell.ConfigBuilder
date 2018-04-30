@@ -6,6 +6,7 @@ has different databases configured in web.config, this package can support
 each developer with a unique web.config.
 
 * [Documentation](#documentation)
+* [Tutorial](#tutorial)
 * [License](#license)
 * [Author](#author)
 * [Changelog](#changelog)
@@ -154,6 +155,10 @@ or setting it in the .csproj file
 
 ### Legacy
 Meriworks.PowerShell.ConfigBuilder had a previous convention including a .base. notation in the filename. This is still supported, and documentation regarding that can be [found at github](https://github.com/meriworks/PowerShell.ConfigBuilder/blob/b6c8584ea626558b9068f7f91f7bfbb835013f6b/Meriworks.PowerShell.ConfigBuilder/nuspec/content/_msbuild/Meriworks.PowerShell.ConfigBuilder/readme.md).
+
+<a name="tutorial"></a>
+## Tutorial
+<iframe width="720" height="480" src="https://www.youtube.com/embed/rodNUYriEYI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 <a name="license"></a>
 ## License
