@@ -158,7 +158,9 @@ Meriworks.PowerShell.ConfigBuilder had a previous convention including a .base. 
 
 <a name="tutorial"></a>
 ## Tutorial
-<iframe width="720" height="480" src="https://www.youtube.com/embed/rodNUYriEYI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+There is a video tutorial available on youtube.
+[![Howto: Manage changes in web.config with your team in Visual Studio](https://img.youtube.com/vi/rodNUYriEYI/0.jpg)](https://www.youtube.com/watch?v=rodNUYriEYI)
+
 
 <a name="license"></a>
 ## License
