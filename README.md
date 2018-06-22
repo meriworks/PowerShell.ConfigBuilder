@@ -98,7 +98,7 @@ and add a merge file named **app.config.merge.xdt** with the following contents
 	<?xml version="1.0" encoding="utf-8"?>
 	<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
 	  <appSettings>		
-	    <add key="path" value="$(ProjectDir)MyFolder\some.file" xdt:Locator="Match(key)" xdt:Transform="SetAttributes" > 
+	    <add key="path" value="$(ProjectDir)MyFolder\some.file" xdt:Locator="Match(key)" xdt:Transform="SetAttributes" /> 
 	  </appSettings>
 	</configuration>
 
