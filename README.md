@@ -174,6 +174,9 @@ Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](ht
 <a name="changelog"></a>
 ## Changelog
 
+## v5.2.0 - 2019-04-01
+* Fixed issue where file is written to even if no changes where detected on merge/replace
+
 ## v5.1.5 - 2018-04-29
 * Fixed issue where merge didn't trigger if .merge.xdt is the only mergefile
 
