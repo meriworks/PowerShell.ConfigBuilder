@@ -185,7 +185,7 @@ function PerformMerge {
 			Write-Host "Updating merge file $_"
 			Copy-Item $tempFile $_
 		} else {
-			Write-Host "Merge produced no changes"
+			Write-Host "Merge produced no changes to target file"
 		}
         Remove-Item $tempFile
     }

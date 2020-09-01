@@ -174,6 +174,9 @@ Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](ht
 <a name="changelog"></a>
 ## Changelog
 
+### v5.3.0 - 2020-09-01
+* Moved to azure pipelines
+
 ### v5.2.0 - 2019-04-01
 * Fixed issue where file is written to even if no changes where detected on merge/replace
 
