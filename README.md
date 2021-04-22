@@ -164,15 +164,21 @@ There is a video tutorial available on youtube.
 
 
 <a name="license"></a>
+
 ## License
 Project is licensed using the [MIT License](LICENSE.md).
 
 <a name="author"></a>
+
 ## Author
 Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](http://www.meriworks.se).
 
 <a name="changelog"></a>
+
 ## Changelog
+
+### v5.4 - 2021-04-22
+* Removed dll from nuget package
 
 ### v5.3.0 - 2020-09-01
 * Moved to azure pipelines
