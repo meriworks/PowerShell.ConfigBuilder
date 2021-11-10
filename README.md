@@ -177,6 +177,9 @@ Package is developed by [Dan Händevik](mailto:dan@meriworks.se), [Meriworks](ht
 
 ## Changelog
 
+### v5.5 - 2021-11-10
+* Fixed paths to PowerShell to work better in vscode/mac
+
 ### v5.4 - 2021-04-22
 * Removed dll from nuget package
 
